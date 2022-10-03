@@ -2,19 +2,42 @@ import java.util.*;
 
 public class ClackData {
 
-	public static final CONSTANT_LISTUSERS = 0;
-	public static final CONSTANT_LOGOUT = 1;
-	public static final CONSTANT_SENDMESSAGE = 2;
-	public static final CONSTANT_SENDFILE = 3;
+	//TODO: Are these supposed to be public?
+	public static final int CONSTANT_LISTUSERS = 0;
+	public static final int CONSTANT_LOGOUT = 1;
+	public static final int CONSTANT_SENDMESSAGE = 2;
+	public static final int CONSTANT_SENDFILE = 3;
 
-	String userName;
-	int type;
-	Date date;
+	private String userName;
+	private int type;
+	private Date date;
 
-	public ClackData(userName, type) {
+	public ClackData(String userName, int type) {
 		this.userName = userName;
 		this.type = type;
-		//TODO: initialize date here
+		date = new Date();
 	}
+
+	public ClackData(int type) {
+		ClackData("Anon", type);
+	}
+
+	public ClackData() {
+		ClackData("Anon", 0);
+	}
+	
+	public int getType() {
+		return type;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public ClackData abstract getData();
 
 }
