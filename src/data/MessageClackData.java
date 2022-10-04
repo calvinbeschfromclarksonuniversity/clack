@@ -11,22 +11,31 @@ public class MessageClackData extends ClackData {
 
 	public MessageClackData() {
 		super();
-		this.message = "";
+		this.message = null;
 	}
 
-	public ClackData getData() {
-		return this;
+	public String getData() {
+		return message;
 	}
 
 	public boolean equals(Object otherMsg) {
-		MessageClackData other = (MessageClackData)otherMsg;
-		return this.message == other.message && this.userName == other.userName && this.date == other.date && this.type == other.type;
+		MessageClackData other = (MessageClackData) otherMsg;
+		return this.message.equals(other.message)
+				&& this.userName.equals(other.userName)
+				&& this.type == other.type
+				&& this.date.equals(other.date);
 	}
 
 	public int hashCode() {
-		//TODO: Implement this!
+		String uniqueString = message + '`' + userName + '`' + type + '`' + date;
+		return uniqueString.hashCode();
 	}
 
 	public String toString() {
-		System.out.println("MessageClackData:\nMessage: " + message + "\nType: " + type + "\nSender: " + userName + "\nTime: " + date.toString());
+		return "MessageClackData Instance:" + '\n'
+				+ "Message: " + message + '\n'
+				+ "Sender: " + userName + '\n'
+				+ "Type: " + type + '\n'
+				+ "Time sent: " + date + '\n';
 	}
+}

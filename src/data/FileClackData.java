@@ -1,17 +1,17 @@
 
 
-public class FileClackData {
+public class FileClackData extends ClackData {
 	private String fileName;
 	private String fileContents;
 
-	public FileClackData(userName, fileName, type) {
+	public FileClackData(String userName, String fileName, int type) {
 		super(userName, type);
 		this.fileName = fileName;
 		fileContents = null;
 	}
 
 	public FileClackData() {
-		FileClackData("Anon", "unnamed", 3);
+		this("Anon", "unnamed", 3);
 	}
 
 	public void setFileName(String fileName) {
@@ -26,17 +26,31 @@ public class FileClackData {
 		return fileContents;
 	}
 
-	public String readFileContents() { }
+	public String readFileContents() { return null; } //To be implemented later
 	
-	public void writeFileContents() { }
+	public void writeFileContents() { } //To be implemented later
 
-	public int hashCode() { //TODO: implement
+	public int hashCode() {
+		String uniqueString = fileName + '`' + fileContents + '`' + userName + '`' + type + '`' + date;
+		return uniqueString.hashCode();
 	}
 
 	public boolean equals(Object otherFile) {
-		FileClackData other = (FileClackData)otherFile
-		return this.fileName == other.fileName && this.fileContents == other.fileContents && this.userName == other.userName && this.date.equals(other.date);
+		FileClackData other = (FileClackData)otherFile;
+		return this.fileName.equals(other.fileName)
+				&& this.fileContents.equals(other.fileContents)
+				&& this.userName.equals(other.userName)
+				&& this.date.equals(other.date)
+
+				&& this.type == other.type; //Just in case FileClackData must support more types in the future
 	}
 
-	public void toString() { //TODO: implement }
+	public String toString() {
+		return "FileClackData Instance:" + '\n'
+				+ "File: " + fileName + '\n'
+				+ "File Contents: " + fileContents + '\n'
+				+ "Sender: " + userName + '\n'
+				+ "Type: " + type + '\n'
+				+ "Time sent: " + date + '\n';
+	}
 }

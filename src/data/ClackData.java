@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class ClackData {
+public abstract class ClackData {
 
 	//TODO: Are these supposed to be public?
 	public static final int CONSTANT_LISTUSERS = 0;
@@ -8,9 +8,9 @@ public class ClackData {
 	public static final int CONSTANT_SENDMESSAGE = 2;
 	public static final int CONSTANT_SENDFILE = 3;
 
-	private String userName;
-	private int type;
-	private Date date;
+	protected String userName;
+	protected int type;
+	protected Date date;
 
 	public ClackData(String userName, int type) {
 		this.userName = userName;
@@ -19,11 +19,11 @@ public class ClackData {
 	}
 
 	public ClackData(int type) {
-		ClackData("Anon", type);
+		this("Anon", type);
 	}
 
 	public ClackData() {
-		ClackData("Anon", 0);
+		this("Anon", 0);
 	}
 	
 	public int getType() {
@@ -38,6 +38,6 @@ public class ClackData {
 		return date;
 	}
 
-	public ClackData abstract getData();
+	public abstract String getData();
 
 }
