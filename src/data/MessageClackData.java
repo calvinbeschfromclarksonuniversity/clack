@@ -1,4 +1,6 @@
+package data;
 
+import java.util.Objects;
 
 public class MessageClackData extends ClackData {
 
@@ -20,7 +22,7 @@ public class MessageClackData extends ClackData {
 
 	public boolean equals(Object otherMsg) {
 		MessageClackData other = (MessageClackData) otherMsg;
-		return this.message.equals(other.message)
+		return Objects.equals(this.message, other.message)
 				&& this.userName.equals(other.userName)
 				&& this.type == other.type
 				&& this.date.equals(other.date);

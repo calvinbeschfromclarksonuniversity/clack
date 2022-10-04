@@ -1,5 +1,7 @@
-
+package main;
 //import main.ClackData
+
+import data.ClackData;
 
 public class ClackClient {
 

@@ -1,3 +1,5 @@
+import data.ClackData;
+
 public class ClackServer {
     //import main.ClackData
     int port;

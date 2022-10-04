@@ -1,4 +1,6 @@
+package data;
 
+import java.util.Objects;
 
 public class FileClackData extends ClackData {
 	private String fileName;
@@ -37,8 +39,9 @@ public class FileClackData extends ClackData {
 
 	public boolean equals(Object otherFile) {
 		FileClackData other = (FileClackData)otherFile;
+
 		return this.fileName.equals(other.fileName)
-				&& this.fileContents.equals(other.fileContents)
+				&& Objects.equals(this.fileContents, other.fileContents) //Objects#equals used because it works on nulls
 				&& this.userName.equals(other.userName)
 				&& this.date.equals(other.date)
 
