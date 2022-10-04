@@ -1,10 +1,5 @@
-# clack
-Like Slack but clacky. Truly the pinnacle of datafication.
+# clack Part 1 report
+Authors: Trevor Bartholomew Savage and Calvin Prothificus Besch
 
-Things to mention in report:
-
-Had to use Objects#equals in any comparisons in the equals methods of my various classes that would possibly include
-nulls, because Objects#equals can handle nulls but you cant call equals on a null reference.
-
-FileClackData instances can be initialized with types other than 3 because the type variable doesn't really do anything.
-Same for MessageClackData and being initialized with type 3.
+  In order to handle the various equals methods in our classes, we had to use Objects#equals for any necessary comparisons that could possibly include a null. This is because if the object from which the comparison is called is actually instead a null reference, an exception will be thrown as null references aren't objects and don't have methods.
+  Currently, FileClackData instances can be initalized with types 0-2, MessageClackData types, and MessageClackData can be initialized with type 3, the FileClackData type. This is because the type system doesn't actually do anything yet - the project document says it will be further developed in future iterations of Clack.
