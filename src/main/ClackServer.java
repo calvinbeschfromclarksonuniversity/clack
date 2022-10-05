@@ -26,8 +26,8 @@ public class ClackServer {
      * Default constructor for ClackServer. Default values:
      * port: 7000
      */
-    ClackServer(){
-        new ClackServer(7000);
+    public ClackServer(){
+        this(7000);
     }
     void start(){}
     void receiveData(){}
@@ -69,7 +69,7 @@ public class ClackServer {
      * @return the hash code of this instance of ClackServer
      */
     public int hashCode(){
-        String uniqueString = port + "`" + closeConnection + "`" + dataToReceiveFromClient.hashCode() + "`" + dataToSendToClient.hashCode();
+        String uniqueString = port + "`" + closeConnection + "`" + dataToReceiveFromClient + "`" + dataToSendToClient;
         return uniqueString.hashCode();
     }
 }

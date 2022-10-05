@@ -39,9 +39,7 @@ public class ClackClient {
     */
     
    public ClackClient(String userName, String hostName) {
-            new ClackClient(userName, hostName, 7000);
-
-
+            this(userName, hostName, 7000);
     }
     
     /**
@@ -52,7 +50,7 @@ public class ClackClient {
     */
     
    public ClackClient(String userName){
-            new ClackClient(userName, "localhost");
+            this(userName, "localhost");
     }
 
     /**
@@ -61,8 +59,8 @@ public class ClackClient {
     * hostName: localhost
     * port: 7000
     */
-    ClackClient(){
-        new ClackClient("Anonymous");
+    public ClackClient(){
+        this("Anonymous");
     }
     
     void start(){}
@@ -110,7 +108,7 @@ public class ClackClient {
         return "The username of the client is " + this.userName + "\n" +
                 "The host name of the client is " + this.hostName + "\n" +
                 "The port of the client is: " + this.port + "\n" +
-                "The data to send to the server is : " + this.dataToSendToServer + "\n +" +
+                "The data to send to the server is : " + this.dataToSendToServer + "\n" +
                 "The data to send to the server is : " + this.dataToSendToServer + "\n\n";
     }
 
@@ -123,7 +121,7 @@ public class ClackClient {
      * @return the hash code of this instance of ClackClient
      */
     public int hashCode(){
-      String uniqueString = userName + "`" + hostName + "`" + port + "`" + closeConnection + "`" + dataToSendToServer.hashCode() + "`" + dataToRecieveFromServer.hashCode();
+      String uniqueString = userName + "`" + hostName + "`" + port + "`" + closeConnection + "`" + dataToSendToServer + "`" + dataToRecieveFromServer;
         return uniqueString.hashCode();
     }
 }
