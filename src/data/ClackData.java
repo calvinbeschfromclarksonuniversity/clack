@@ -135,11 +135,4 @@ public abstract class ClackData {
 	 */
 	public abstract String getData();
 
-	/**
-	 * Returns the held data decrypted with the given key
-	 * @param key key to decrypt with
-	 * @return decrypted data
-	 */
-	public abstract String getData(String key);
-
 }
