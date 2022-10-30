@@ -19,7 +19,10 @@ public class MessageClackData extends ClackData {
 		super(userName, type);
 		this.message = message;
 	}
-
+	public MessageClackData(String userName, String message,String key, int type) {
+		super(userName, type);
+		this.message = encrypt (message, key);
+	}
 	/**
 	 * Default constructor of MessageClackData. Default values:
 	 * userName: "Anon"
