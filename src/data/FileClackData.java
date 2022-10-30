@@ -55,7 +55,7 @@ public class FileClackData extends ClackData {
 		return fileContents;
 	}
 
-	public String readFileContents() { return null; } //To be implemented later
+	public void readFileContents() { } //To be implemented later
 	
 	public void writeFileContents() { } //To be implemented later
 

@@ -2,10 +2,14 @@ package main;
 
 import data.ClackData;
 
+import java.util.Objects;
+
 /**
  * Represents the Clack server, the central entity that stores data and connects clients.
  */
 public class ClackServer {
+
+    private static final int DEFAULT_PORT = 7000;
 
     int port;
     boolean closeConnection;
@@ -27,7 +31,7 @@ public class ClackServer {
      * port: 7000
      */
     public ClackServer(){
-        this(7000);
+        this(DEFAULT_PORT);
     }
     void start(){}
     void receiveData(){}
@@ -47,7 +51,7 @@ public class ClackServer {
      */
     public boolean equals(Object other){
         ClackServer server = (ClackServer)other;
-        return ((this.port == server.port) && (this.dataToSendToClient == server.dataToSendToClient) && (this.dataToReceiveFromClient == server.dataToReceiveFromClient));
+        return ((this.port == server.port) && (this.closeConnection == server.closeConnection) && (this.dataToSendToClient == server.dataToSendToClient) && (this.dataToReceiveFromClient == server.dataToReceiveFromClient));
 
     }
 
@@ -56,6 +60,7 @@ public class ClackServer {
      */
     public String toString() {
         return  "The port of the client is: " + this.port + "\n" +
+                "Is the connection open? :" + this.closeConnection + "\n" +
                 "The data to send to the client is : " + this.dataToSendToClient + "\n +" +
                 "The data to receive from the client : " + this.dataToReceiveFromClient + "\n\n";
     }
@@ -69,8 +74,7 @@ public class ClackServer {
      * @return the hash code of this instance of ClackServer
      */
     public int hashCode(){
-        String uniqueString = port + "`" + closeConnection + "`" + dataToReceiveFromClient + "`" + dataToSendToClient;
-        return uniqueString.hashCode();
+        return Objects.hash(this.port, this.closeConnection, this.dataToSendToClient, this.dataToReceiveFromClient);
     }
 }
 

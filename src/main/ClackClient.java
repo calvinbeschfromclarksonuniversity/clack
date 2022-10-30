@@ -3,10 +3,14 @@ package main;
 
 import data.ClackData;
 
+import java.util.Objects;
+
 /**
 * Represents the clack client entity that sends data to the server 
 */
 public class ClackClient {
+
+    private static final int DEFAULT_PORT = 7000;
 
     String userName;
     String hostName;
@@ -39,7 +43,7 @@ public class ClackClient {
     */
     
    public ClackClient(String userName, String hostName) {
-            this(userName, hostName, 7000);
+            this(userName, hostName, DEFAULT_PORT);
     }
     
     /**
@@ -98,7 +102,7 @@ public class ClackClient {
      */
     public boolean equals(Object other){
       ClackClient client = (ClackClient)other;
-      return ((this.userName == client.userName) && (this.hostName == client.hostName) && (this.port == client.port) && (this.dataToRecieveFromServer == client.dataToRecieveFromServer) && (this.dataToSendToServer == client.dataToSendToServer));
+      return ((this.userName == client.userName) && (this.hostName == client.hostName) && (this.port == client.port) && (this.closeConnection == client.closeConnection) && (this.dataToRecieveFromServer == client.dataToRecieveFromServer) && (this.dataToSendToServer == client.dataToSendToServer));
     }
 
     /**
@@ -108,6 +112,7 @@ public class ClackClient {
         return "The username of the client is " + this.userName + "\n" +
                 "The host name of the client is " + this.hostName + "\n" +
                 "The port of the client is: " + this.port + "\n" +
+                "Is connection open?: " + this.closeConnection + "\n" +
                 "The data to send to the server is : " + this.dataToSendToServer + "\n" +
                 "The data to send to the server is : " + this.dataToSendToServer + "\n\n";
     }
@@ -121,7 +126,6 @@ public class ClackClient {
      * @return the hash code of this instance of ClackClient
      */
     public int hashCode(){
-      String uniqueString = userName + "`" + hostName + "`" + port + "`" + closeConnection + "`" + dataToSendToServer + "`" + dataToRecieveFromServer;
-        return uniqueString.hashCode();
+        return Objects.hash(this.userName, this.hostName, this.port, this.closeConnection, this.dataToSendToServer, this.dataToRecieveFromServer);
     }
 }
