@@ -32,6 +32,7 @@ public class ClackClient {
     * @param userName, the name of the client using clack
     * @param hostName, the name of the device being used by the client
     * @param port the networking poet used to connect to the server
+     * @throws IllegalArgumentException
     */
 
     public ClackClient(String userName, String hostName, int port){
@@ -59,6 +60,7 @@ public class ClackClient {
     * @param userName, the name of the client using clack
     * @param hostName, the name of the device being used by the client
     * port = 7000
+     * @throws IllegalArgumentException
     */
     
    public ClackClient(String userName, String hostName) {
@@ -78,6 +80,7 @@ public class ClackClient {
     * @param userName, the name of the client using clack
     * hostName: localhost
     * port: 7000
+     * @throws IllegalArgumentException
     */
     
    public ClackClient(String userName){
@@ -93,6 +96,7 @@ public class ClackClient {
     * userName: Anonymous
     * hostName: localhost
     * port: 7000
+     * @throws IllegalArgumentException
     */
     public ClackClient(){
         this("Anonymous");
