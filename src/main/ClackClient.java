@@ -108,7 +108,7 @@ public class ClackClient {
             closeConnection = true;
         }
         else if (input == "SENDFILE") {
-             while(inFromStd.hasNext()) input += inFromStd.next();
+             while(inFromStd.hasNext()) input += (" " + inFromStd.next());
              dataToSendToServer = new FileClackData(userName, input, 3);
 
              try {
@@ -126,7 +126,7 @@ public class ClackClient {
             //DO NOT TEST!!!
         }
         else{
-            while(inFromStd.hasNext()) input += inFromStd.next();
+            while(inFromStd.hasNext()) input += (" " + inFromStd.next());
             dataToSendToServer = new MessageClackData(userName, input, 2);
             }
     }

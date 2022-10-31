@@ -63,13 +63,22 @@ public class TestClackData {
         System.out.println(message.getData());
         System.out.println(message.getData("BILLCIPHER"));
 
-        FileClackData data = new FileClackData("Hooty", "journal.txt", 3);
+        FileClackData data = new FileClackData("Hooty", "quote.txt", 3);
         try {
             data.readFileContents();
             System.out.println(data.getData());
+            data.writeFileContents();
         } catch(IOException e) {
             System.err.println("ERROR! General I/O error!: " + e);
         }
 
+        FileClackData secretData = new FileClackData("Secure Hooty", "quote.txt", 3);
+        try {
+            secretData.readFileContents("HOOT");
+            System.out.println(secretData.getData("HOOT"));
+            secretData.writeFileContents("HOOT");
+        } catch(IOException e) {
+            System.err.println("ERROR! General I/O error!: " + e);
+        }
    }
 }
