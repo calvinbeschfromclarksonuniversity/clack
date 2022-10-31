@@ -25,7 +25,83 @@ Authors: Trevor Bartholomew Savage and Calvin Prothificus Besch
   -start, this starts the client- server interface by initializing the scanner that will be used in readClientData
   -Updated constructors to throw IllegalArgumentExceptions when necessary
   
+  The terminal output when running testClackClient is:
   
+  The username of the client is Billy
+The host name of the client is Bob
+The port of the client is: 1024
+Is connection open?: false
+The data to send to the server is : null
+The data to send to the server is : null
+
+
+The username of the client is Billy
+The host name of the client is Bob
+The port of the client is: 7000
+Is connection open?: false
+The data to send to the server is : null
+The data to send to the server is : null
+
+
+The username of the client is Billy
+The host name of the client is localhost
+The port of the client is: 7000
+Is connection open?: false
+The data to send to the server is : null
+The data to send to the server is : null
+
+
+The username of the client is Anonymous
+The host name of the client is localhost
+The port of the client is: 7000
+Is connection open?: false
+The data to send to the server is : null
+The data to send to the server is : null
+
+
+Billy
+Bob
+1024
+false
+true
+1519325177
+-1885299100
+-1885299100
+The username of the client is N
+The host name of the client is Nxcellent
+The port of the client is: 1024
+Is connection open?: false
+The data to send to the server is : null
+The data to send to the server is : null
+
+
+Hello this is a message
+INPUT: Hello this is a messageMessageClackData Instance:
+Message: Hello this is a message
+Sender: Billy
+Type: 2
+Time sent: Mon Oct 31 18:45:52 EDT 2022
+
+SENDFILE quote.txt
+INPUT: SENDFILE quote.txtFileClackData Instance:
+File: quote.txt
+File Contents: null
+Sender: Billy
+Type: 3
+Time sent: Mon Oct 31 18:46:04 EDT 2022
+
+DONE
+INPUT: DONEnull
+this is done
+INPUT: this is doneMessageClackData Instance:
+Message: this is done
+Sender: Anonymous
+Type: 2
+Time sent: Mon Oct 31 18:46:25 EDT 2022
+
+
+Process finished with exit code 0
+
   
   
   
