@@ -75,32 +75,33 @@ The data to send to the server is : null
 The data to send to the server is : null
 
 
-Hello this is a message
-INPUT: Hello this is a messageMessageClackData Instance:
-Message: Hello this is a message
-Sender: Billy
-Type: 2
-Time sent: Mon Oct 31 18:45:52 EDT 2022
-
+DONE
+null
 SENDFILE quote.txt
-INPUT: SENDFILE quote.txtFileClackData Instance:
+FileClackData Instance:
 File: quote.txt
 File Contents: null
 Sender: Billy
 Type: 3
-Time sent: Mon Oct 31 18:46:04 EDT 2022
+Time sent: Mon Oct 31 18:55:55 EDT 2022
 
-DONE
-INPUT: DONEnull
-this is done
-INPUT: this is doneMessageClackData Instance:
-Message: this is done
+This is a message
+MessageClackData Instance:
+Message: This is a message
+Sender: Billy
+Type: 2
+Time sent: Mon Oct 31 18:56:11 EDT 2022
+
+This is another message
+MessageClackData Instance:
+Message: This is another message
 Sender: Anonymous
 Type: 2
-Time sent: Mon Oct 31 18:46:25 EDT 2022
+Time sent: Mon Oct 31 18:56:17 EDT 2022
 
 
 Process finished with exit code 0
+
 
   
   
