@@ -120,7 +120,6 @@ public class ClackClient {
      */
     void readClientData(){
         String input = inFromStd.nextLine();
-        System.out.print("INPUT: " + input);
         if (input.equals("DONE")) {
             closeConnection = true;
         }
