@@ -1,5 +1,6 @@
 package data;
 
+import java.io.*;
 import java.util.Objects;
 
 /**
@@ -55,9 +56,77 @@ public class FileClackData extends ClackData {
 		return fileContents;
 	}
 
-	public void readFileContents() { } //To be implemented later
-	
-	public void writeFileContents() { } //To be implemented later
+	/**
+	 * @param key key to decrypt with
+	 * @return the held fileContents, decrypted
+	 */
+	public String getData(String key) {
+		return decrypt(fileContents, key);
+	}
+
+	/**
+	 * Opens file with path stored in fileName, and saves unencrypted contents to fileContents
+	 * @throws IOException
+	 */
+	public void readFileContents() throws IOException {
+		try {
+			fileContents = "";
+			BufferedReader reader = new BufferedReader(new FileReader(fileName));
+			String line;
+			while ((line = reader.readLine()) != null) fileContents += line;
+			reader.close();
+		} catch(FileNotFoundException e) {
+			System.err.println("ERROR! File not found!: " + e);
+		}
+	}
+
+	/**
+	 * Opens file with path stored in fileName, encrypts contents, and saves them to fileContents
+	 * @param key encryption key
+	 * @throws IOException
+	 */
+	public void readFileContents(String key) throws IOException {
+		try {
+			fileContents = "";
+			BufferedReader reader = new BufferedReader(new FileReader(fileName));
+			String line;
+			while ((line = reader.readLine()) != null) fileContents += encrypt(line, key);
+			reader.close();
+		} catch(FileNotFoundException e) {
+			System.err.println("ERROR! File not found!: " + e);
+		}
+	}
+
+	/**
+	 * Writes unencrypted value of fileContents to file at path stored in fileName
+	 */
+	public void writeFileContents() {
+		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+			writer.write(fileContents, 0, fileContents.length());
+			writer.close();
+		} catch(FileNotFoundException e) {
+			System.err.println("ERROR! File not found!: " + e);
+		} catch(IOException e) {
+			System.err.println("ERROR! General file I/O error: " + e);
+		}
+	}
+
+	/**
+	 * Decrypts value of fileContents and saves to file at path stored in fileName
+	 * @param key encryption key
+	 */
+	public void writeFileContents(String key) {
+		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+			writer.write(decrypt(fileContents, key), 0, fileContents.length());
+			writer.close();
+		} catch(FileNotFoundException e) {
+			System.err.println("ERROR! File not found!: " + e);
+		} catch(IOException e) {
+			System.err.println("ERROR! General file I/O error: " + e);
+		}
+	}
 
 	/**
 	 * Returns an integer that will be the same as that of another FileClackData considered equal (see
