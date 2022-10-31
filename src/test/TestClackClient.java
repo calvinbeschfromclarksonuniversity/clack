@@ -5,7 +5,7 @@ import main.ClackClient;
 public class TestClackClient {
 
     public static void main(String[] args) {
-        ClackClient clientA = new ClackClient("Billy", "Bob", 42);
+        ClackClient clientA = new ClackClient("Billy", "Bob", 1024);
         ClackClient clientB = new ClackClient("Billy", "Bob");
         ClackClient clientC = new ClackClient("Billy");
         ClackClient clientD = new ClackClient();
@@ -25,9 +25,9 @@ public class TestClackClient {
         System.out.println(clientD.hashCode());
         System.out.println(clientE.hashCode());
 
-        ClackClient clientN = new ClackClient("N", "Nxcellent", -234567890);
+        ClackClient clientN = new ClackClient("N", "Nxcellent", 1024);
         System.out.println(clientN);
 
-
+        clientA.start();
     }
 }

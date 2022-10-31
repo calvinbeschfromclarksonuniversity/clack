@@ -104,7 +104,7 @@ public class ClackClient {
     /**
      * Starts this client's communication with the server.
      */
-    void start(){
+    public void start(){
         inFromStd = new Scanner(System.in);
         readClientData();
         dataToRecieveFromServer = dataToSendToServer;
@@ -115,16 +115,17 @@ public class ClackClient {
      * Read input from the client and act accordingly on it depending on what it is.
      */
     void readClientData(){
-        String input = inFromStd.next();
-        if (input == "DONE") {
+        String input = inFromStd.nextLine();
+        System.out.print("INPUT: " + input);
+        if (input.equals("DONE")) {
             closeConnection = true;
         }
-        else if (input == "SENDFILE") {
-             while(inFromStd.hasNext()) input += (" " + inFromStd.next());
-             dataToSendToServer = new FileClackData(userName, input, 3);
+        else if (input.equals("LISTUSERS")) { /* DO NOT TEST */ }
+        else if (input.length() >= 10 && input.substring(0, 8).equals("SENDFILE")) {
+             dataToSendToServer = new FileClackData(userName, input.substring(9), 3);
 
              try {
-                 FileReader reader = new FileReader(input);
+                 FileReader reader = new FileReader(input.substring(9));
                  reader.read();
              } catch(FileNotFoundException e) {
                  System.err.println("Error! File not found: " + e);
@@ -134,11 +135,7 @@ public class ClackClient {
                  dataToSendToServer = null;
              }
         }
-        else if (input == "LISTUSERS") {
-            //DO NOT TEST!!!
-        }
         else{
-            while(inFromStd.hasNext()) input += (" " + inFromStd.next());
             dataToSendToServer = new MessageClackData(userName, input, 2);
             }
     }
@@ -148,9 +145,7 @@ public class ClackClient {
     void sendData(){}
     void recieveData(){}
     void printData(){
-         System.out.println("Type: " + dataToSendToServer.getType() + '\n' );
-         System.out.println("Username: " + dataToSendToServer.getUserName() + '\n' );
-         System.out.println("Date: " + dataToSendToServer.getDate() + '\n' );
+            System.out.println(dataToSendToServer);
         }
     /**
      * Prints the contents of dataToSendToServer to the client
