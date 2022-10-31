@@ -33,14 +33,25 @@ public class ClackClient {
     * @param hostName, the name of the device being used by the client
     * @param port the networking poet used to connect to the server
     */
-    
-   public ClackClient(String userName, String hostName, int port){
+
+    public ClackClient(String userName, String hostName, int port){
+        if (userName == null)
+            throw new IllegalArgumentException("The username cannot be null");
+        else
             this.userName = userName;
+        if (hostName == null)
+            throw new IllegalArgumentException("The username cannot be null");
+        else
             this.hostName = hostName;
+
+        if (port < 1024)
+            throw new IllegalArgumentException("The port must be an integer greater than 1024");
+        else
             this.port = port;
-            this.closeConnection = false;
-            dataToSendToServer = null;
-            dataToRecieveFromServer = null;
+
+        this.closeConnection = false;
+        dataToSendToServer = null;
+        dataToRecieveFromServer = null;
     }
     
     /**
