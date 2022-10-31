@@ -2,8 +2,14 @@ package main;
 
 
 import data.ClackData;
+import data.FileClackData;
+import data.MessageClackData;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Objects;
+import java.util.Scanner;
 
 /**
 * Represents the clack client entity that sends data to the server 
@@ -71,27 +77,46 @@ public class ClackClient {
     /**
      * @return userName, the name of the client using clack
      */
-    void start(){}
+
+    /**
+     * Starts this client's communication with the server.
+     */
+    void start(){
+        inFromStd = new Scanner(System.in);
+        readClientData();
+        dataToRecieveFromServer = dataToSendToServer;
+        printData();
+    }
+
+    /**
+     * Read input from the client and act accordingly on it depending on what it is.
+     */
     void readClientData(){
-        if (inFromStd == DONE) {
+        String input = inFromStd.next();
+        if (input == "DONE") {
             closeConnection = true;
         }
-         /* else if (inFromStd == (SENDFILE x)){
-             if x is readable {
-         dataToSendToServer = FileClackData(x,3)
-          }
-          else {
-          dataToSendToServer = null;
-          system.err.println("File x is unreadable");
-          }
-          TODO
-          need to implement this in a way that works
-*/
-         else if (inFromStd == LISTUSERS) {
+        else if (input == "SENDFILE") {
+             while(inFromStd.hasNext()) input += inFromStd.next();
+             dataToSendToServer = new FileClackData(userName, input, 3);
 
+             try {
+                 FileReader reader = new FileReader(input);
+                 reader.read();
+             } catch(FileNotFoundException e) {
+                 System.err.println("Error! File not found: " + e);
+                 dataToSendToServer = null;
+             } catch(IOException e) {
+                 System.err.println("Error! General I/O error: " + e);
+                 dataToSendToServer = null;
+             }
+        }
+        else if (input == "LISTUSERS") {
+            //DO NOT TEST!!!
         }
         else{
-            dataToSendToServer = MessageClackData (2)
+            while(inFromStd.hasNext()) input += inFromStd.next();
+            dataToSendToServer = new MessageClackData(userName, input, 2);
             }
     }
     /**

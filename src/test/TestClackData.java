@@ -55,5 +55,21 @@ public class TestClackData {
         System.out.println(fileD.getData());
         System.out.println(fileD.equals(fileA));
         System.out.println(messageD.equals(messageA));
+
+        //Part 2
+        System.out.println("\n\nPart 2 Testing\n\n");
+
+        MessageClackData message = new MessageClackData("Stanley Pines", "Welcome to the Mystery Shack!", "BILLCIPHER", 2);
+        System.out.println(message.getData());
+        System.out.println(message.getData("BILLCIPHER"));
+
+        FileClackData data = new FileClackData("Hooty", "journal.txt", 3);
+        try {
+            data.readFileContents();
+            System.out.println(data.getData());
+        } catch(IOException e) {
+            System.err.println("ERROR! General I/O error!: " + e);
+        }
+
    }
 }
