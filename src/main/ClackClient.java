@@ -10,6 +10,7 @@ import java.util.Objects;
 */
 public class ClackClient {
 
+    private static final String KEY = "PONTIFICUS";
     private static final int DEFAULT_PORT = 7000;
 
     String userName;
@@ -18,7 +19,8 @@ public class ClackClient {
     boolean closeConnection;
     ClackData dataToSendToServer;
     ClackData dataToRecieveFromServer;
-    
+    java.util.Scanner inFromStd;
+
     /**
     * Full constructor for clack client
     * @param userName, the name of the client using clack
@@ -66,16 +68,47 @@ public class ClackClient {
     public ClackClient(){
         this("Anonymous");
     }
-    
+    /**
+     * @return userName, the name of the client using clack
+     */
     void start(){}
-    void readClientData(){}
+    void readClientData(){
+        if (inFromStd == DONE) {
+            closeConnection = true;
+        }
+         /* else if (inFromStd == (SENDFILE x)){
+             if x is readable {
+         dataToSendToServer = FileClackData(x,3)
+          }
+          else {
+          dataToSendToServer = null;
+          system.err.println("File x is unreadable");
+          }
+          TODO
+          need to implement this in a way that works
+*/
+         else if (inFromStd == LISTUSERS) {
+
+        }
+        else{
+            dataToSendToServer = MessageClackData (2)
+            }
+    }
+    /**
+     * Initializes a ClackData obkect 'dataToSendToServer based upon a given input from the user
+     */
     void sendData(){}
     void recieveData(){}
-    void printData(){}
+    void printData(){
+         System.out.println("Type: " + dataToSendToServer.getType() + '\n' );
+         System.out.println("Username: " + dataToSendToServer.getUserName() + '\n' );
+         System.out.println("Date: " + dataToSendToServer.getDate() + '\n' );
+        }
+    /**
+     * Prints the contents of dataToSendToServer to the client
+     */
     
-      /**
-    * @return userName, the name of the client using clack
-    */
+
 
    public String getUserName(){
         return this.userName;
