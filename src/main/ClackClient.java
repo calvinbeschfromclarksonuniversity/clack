@@ -40,7 +40,7 @@ public class ClackClient {
         else
             this.userName = userName;
         if (hostName == null)
-            throw new IllegalArgumentException("The username cannot be null");
+            throw new IllegalArgumentException("The hostname cannot be null");
         else
             this.hostName = hostName;
 
@@ -62,9 +62,17 @@ public class ClackClient {
     */
     
    public ClackClient(String userName, String hostName) {
-            this(userName, hostName, DEFAULT_PORT);
-    }
-    
+       this(userName, hostName, DEFAULT_PORT);
+
+       if (userName == null)
+           throw new IllegalArgumentException("The username cannot be null");
+       else
+           this.userName = userName;
+       if (hostName == null)
+           throw new IllegalArgumentException("The hostname cannot be null");
+       else
+           this.hostName = hostName;
+   }
     /**
     * Partial constructor for clack client
     * @param userName, the name of the client using clack
@@ -74,6 +82,10 @@ public class ClackClient {
     
    public ClackClient(String userName){
             this(userName, "localhost");
+       if (userName == null)
+           throw new IllegalArgumentException("The username cannot be null");
+       else
+           this.userName = userName;
     }
 
     /**
