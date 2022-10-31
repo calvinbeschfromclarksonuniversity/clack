@@ -29,5 +29,8 @@ public class TestClackClient {
         System.out.println(clientN);
 
         clientA.start();
+        clientB.start();
+        clientC.start();
+        clientD.start();
     }
 }
