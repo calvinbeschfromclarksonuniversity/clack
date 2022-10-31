@@ -2,6 +2,33 @@
 Authors: Trevor Bartholomew Savage and Calvin Prothificus Besch
   
   Brief Overview:
+  In the Second Part of this project, we implemented the following:
+  
+  In ClackData:
+  -encrypt, a method which encrypts strings using the Vignere cipher
+  -decrypt,a method which decripts encrypted strings
+  
+  In MessageClackData
+  -implemented constructor that takes a key and immediately encrypts the data
+  -Overloaded getData to allow it to retrieve encrypted data
+  
+  In FileClackData:
+  -readFileContents(), this  reads unsecured files
+  -readFileContents(String Key) this implements decrypt to read secured files
+  -writeFileContents(), this writes unsecured files
+  -writeFileContents(String key), this implements encrypt to write secured files
+  -Overloaded getData to allow it to retrieve encrypted data
+
+  In ClackClient:
+  -readClientData, this uses a scanner to take input from the user and initializes ClackData accordingly
+  -printData, this prints out the contents of the ClackData object dataToRecieveFromServer to the client
+  -start, this starts the client- server interface by initializing the scanner that will be used in readClientData
+  -Updated constructors to throw IllegalArgumentExceptions when necessary
+  
+  
+  
+  
+  
   In the first part of this project, we implemented:
   -ClackServer, a class representing the server that stores data and connectes the clients.
   -ClackClient, a class representing an individual user and what they can do.
