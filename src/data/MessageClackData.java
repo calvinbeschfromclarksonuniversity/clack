@@ -42,6 +42,14 @@ public class MessageClackData extends ClackData {
 	}
 
 	/**
+	 * @param key encryption key
+	 * @return the contained message, decrypted
+	 */
+	public String getData(String key) {
+		return decrypt(message, key);
+	}
+
+	/**
 	 * Returns an integer that will be the same as that of another MessageClackData considered equal (see
 	 * MessageClackData#equals), but different from that of another MessageClackData considered not equal. Implemented by
 	 * constructing a string that has these properties itself, using information from each instance variable and a
