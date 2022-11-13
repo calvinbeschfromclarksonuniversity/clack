@@ -7,7 +7,7 @@ import java.util.Date;
  * @author Calvin Besch
  * @author Trevor Savage
  */
-public abstract class ClackData {
+public abstract class ClackData implements java.io.Serializable{
 
 	/**
 	 * Integer constant representing the type of packet requesting a list of users.
