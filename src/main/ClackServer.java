@@ -2,7 +2,10 @@ package main;
 
 import data.ClackData;
 
+import java.io.*;
+import java.net.ServerSocket;
 import java.util.Objects;
+import java.net.*;
 
 /**
  * Represents the Clack server, the central entity that stores data and connects clients.
@@ -16,14 +19,26 @@ public class ClackServer {
     ClackData dataToReceiveFromClient;
     ClackData dataToSendToClient;
 
+    ObjectInputStream inFromClient;
+
+    ObjectOutputStream outToClient;
+
     /**
      * Full constructor for ClackServer.
      * @param port the networking port for clients to connect to
      */
     public ClackServer(int port){
-        this.port = port;
+        if (port >= 1024){
+            this.port = port;
+        }
+        else {
+            throw new IllegalArgumentException("Port must be greater than 1024");
+
+        }
         dataToReceiveFromClient = null;
         dataToSendToClient = null;
+        inFromClient = null;
+        outToClient = null;
     }
 
     /**
@@ -33,9 +48,51 @@ public class ClackServer {
     public ClackServer(){
         this(DEFAULT_PORT);
     }
-    void start(){}
-    void receiveData(){}
-    void sendData(){}
+
+    /**
+     * Start method for ClackServer reads objectInputStream from user and returns an ObjectOutput Stream
+     */
+    void start(){
+        try{
+            ServerSocket sskt = new ServerSocket(port);
+            Socket clientSkt = sskt.accept();
+            inFromClient = new ObjectInputStream(clientSkt.getInputStream());
+            outToClient = new ObjectOutputStream(clientSkt.getOutputStream());
+            receiveData();
+            dataToSendToClient = dataToReceiveFromClient;
+            sendData();
+
+            outToClient.close();
+            inFromClient.close();
+            clientSkt.close();
+            sskt.close();
+
+        }catch(IOException ioe){
+            System.out.println("IO error occurred while starting");
+        }
+    }
+    /**
+     * Sets dataToReceiveFromClient to the input from inFromClient
+     */
+    void receiveData(){
+        try {
+            dataToReceiveFromClient = (ClackData) inFromClient.readObject();
+        }catch(ClassNotFoundException cnfe){
+            System.out.println("Class Not Found");
+        }catch(IOException ioe){
+            System.out.println("IO error occurred while receiving data");
+        }
+    }
+    /**
+     * Sets outToClient as the serialized form of dataToSendToClient
+     */
+    void sendData(){
+        try{
+            outToClient.writeObject(dataToSendToClient);
+        }catch (IOException ioe){
+            System.out.println("IO error occurred while sending data");
+        }
+    }
 
     /**
      * @return the networking port for clients to connect to
