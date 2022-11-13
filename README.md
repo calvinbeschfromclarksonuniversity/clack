@@ -1,29 +1,110 @@
-# clack Part 2 report
+# clack Part 3 report
 Authors: Trevor Bartholomew Savage and Calvin Prothificus Besch
+
+Brief Overview:
+  In the third Part of this project, we implemented the following:
+  
+  In ClackData:
+  Made ClackData Serializable
+
+  In ClackClient:
+  - new instance variables for ObjectInputStream 'inFromServer' & ObjectOutputStream 'outToServer'
+  - start, a method which opens a new socket to connects to the server using the saved port variable then reads client data    standard input, sends it to the server, recieves an echo back, and prints it to the user using the readClientData(),        sendData() receiveData() and printData() methods. 
+  - sendData method writes the ClackData object in 'dataToSendToServer into ObjectOutpuStream 'outToServer
+  - recieveData method reads a ClackData object into 'dataToReceiveFromServer' from ObjectInputStream 'inFromServer'
+  - main method in ClackClient parses arguments and starts the client.
+  
+  In ClackServer:
+  - new instance variables for ObjectInputStream 'inFromClient' & ObjectOutputStream 'outToClient'
+  - illegal argument exception now thrown when port is set to less than 1024
+  - start method creates a Server Socket and a socket for the client, then recieves data from the client and echoes it back    with the receiveData() and sendData() methods.
+  - receiveData() reads in a ClackData object from the ObjectInputStream ‘inFromClient’ into ‘dataToReceiveFromClient’
+  - sendData() writes out the ClackData object ‘dataToSendToClient’ to the ObjectOutputStream ‘outToClient’.
+  - main method in ClackServer parses arguments and starts the Server.
+  
+  Created JAR files for ClackClient and ClackServer
+  
+  Command line output:
+  
+  With java -jar clackserver.jar:
+  
+  java -jar clackclient.jar
+  test       
+MessageClackData Instance:
+Message: test
+Sender: Anonymous
+Type: 2
+Time sent: Sun Nov 13 16:42:16 EST 2022
+
+  java -jar clackclient.jar trevvywevvy
+hehheehe
+MessageClackData Instance:
+Message: hehheehe
+Sender: trevvywevvy
+Type: 2
+Time sent: Sun Nov 13 16:43:31 EST 2022
+
+java -jar clackclient.jar trevvywevvy@localhost:7000
+hahahahha
+MessageClackData Instance:
+Message: hahahahha
+Sender: trevvywevvy
+Type: 2
+Time sent: Sun Nov 13 16:44:33 EST 2022
+
+java -jar clackclient.jar trevvywevvy@localhost:100
+Exception in thread "main" java.lang.IllegalArgumentException: The port must be an integer greater than 1024
+	at main.ClackClient.<init>(ClackClient.java:51)
+	at main.ClackClient.main(ClackClient.java:131)
+  
+  java -jar clackclient.jar trevvywevvy@localhost
+weeee
+MessageClackData Instance:
+Message: weeee
+Sender: trevvywevvy
+Type: 2
+Time sent: Sun Nov 13 16:46:01 EST 2022
+
+copperthief@boopbox ~/t/d/a/c/c/o/a/clackclient (main) [SIGINT]> java -jar clackcli
+ent.jar trevvywevvy@notlocalhost
+Unknown host: java.net.UnknownHostException: notlocalhost
+
+now, with java -jar clackserver.jar 8000:
+
+java -jar clackclient.jar
+Connection refused: java.net.ConnectException: Connection refused
+
+java -jar clackclient.jar trevvywevvy@localhost:8000
+message
+MessageClackData Instance:
+Message: message
+Sender: trevvywevvy
+Type: 2
+Time sent: Sun Nov 13 16:55:33 EST 2022
   
   Brief Overview:
   In the Second Part of this project, we implemented the following:
   
   In ClackData:
-  -encrypt, a method which encrypts strings using the Vignere cipher
-  -decrypt,a method which decripts encrypted strings
+  - encrypt, a method which encrypts strings using the Vignere cipher
+  - decrypt,a method which decripts encrypted strings
   
   In MessageClackData
-  -implemented constructor that takes a key and immediately encrypts the data
-  -Overloaded getData to allow it to retrieve encrypted data
+  - implemented constructor that takes a key and immediately encrypts the data
+  - Overloaded getData to allow it to retrieve encrypted data
   
   In FileClackData:
-  -readFileContents(), this  reads unsecured files
-  -readFileContents(String Key) this implements decrypt to read secured files
-  -writeFileContents(), this writes unsecured files
-  -writeFileContents(String key), this implements encrypt to write secured files
-  -Overloaded getData to allow it to retrieve encrypted data
+  - readFileContents(), this  reads unsecured files
+  - readFileContents(String Key) this implements decrypt to read secured files
+  - writeFileContents(), this writes unsecured files
+  - writeFileContents(String key), this implements encrypt to write secured files
+  - Overloaded getData to allow it to retrieve encrypted data
 
   In ClackClient:
-  -readClientData, this uses a scanner to take input from the user and initializes ClackData accordingly
-  -printData, this prints out the contents of the ClackData object dataToRecieveFromServer to the client
-  -start, this starts the client- server interface by initializing the scanner that will be used in readClientData
-  -Updated constructors to throw IllegalArgumentExceptions when necessary
+  - readClientData, this uses a scanner to take input from the user and initializes ClackData accordingly
+  - printData, this prints out the contents of the ClackData object dataToRecieveFromServer to the client
+  - start, this starts the client- server interface by initializing the scanner that will be used in readClientData
+  - Updated constructors to throw IllegalArgumentExceptions when necessary
   
   The terminal output when running testClackClient is:
   
@@ -107,18 +188,18 @@ Process finished with exit code 0
   
   
   In the first part of this project, we implemented:
-  -ClackServer, a class representing the server that stores data and connectes the clients.
-  -ClackClient, a class representing an individual user and what they can do.
-  -ClackData, an abstract superclass representing data packets to be sent between the clients and server.
-  -MessageClackData, a subcalss of ClackData representing packets containing messages to be sent between the clients and server.
+  - ClackServer, a class representing the server that stores data and connectes the clients.
+  - ClackClient, a class representing an individual user and what they can do.
+  - ClackData, an abstract superclass representing data packets to be sent between the clients and server.
+  - MessageClackData, a subcalss of ClackData representing packets containing messages to be sent between the clients and server.
   -FileClackData, a subclass of ClackData representing packets containing files to be sent between the clients and server.
   
   Among functions implemented are:
-  -Constructors
-  -Accessors and Mutators
-  -Overloaded toString, equals, and hashCode methods
-  -Empty methods to be implemented later
-  -And more!
+  - Constructors
+  - Accessors and Mutators
+  - Overloaded toString, equals, and hashCode methods
+  - Empty methods to be implemented later
+  - And more!
   
   We also implimented test cases for all the above.
   
