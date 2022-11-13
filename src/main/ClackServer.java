@@ -55,6 +55,7 @@ public class ClackServer {
      */
     public static void main(String[] args) {
         ClackServer server;
+        System.out.println("Starting ClackServer ...");
 
         if (args.length == 0) {
             server = new ClackServer();
@@ -67,6 +68,8 @@ public class ClackServer {
         } else {
             throw new IllegalArgumentException("ClackServer takes either a port number or no arguments.");
         }
+
+        server.start();
     }
 
     void start(){
@@ -75,9 +78,12 @@ public class ClackServer {
             Socket clientSkt = sskt.accept();
             inFromClient = new ObjectInputStream(clientSkt.getInputStream());
             outToClient = new ObjectOutputStream(clientSkt.getOutputStream());
-            receiveData();
-            dataToSendToClient = dataToReceiveFromClient;
-            sendData();
+
+            while (!closeConnection) {
+                receiveData();
+                dataToSendToClient = dataToReceiveFromClient;
+                sendData();
+            }
 
             outToClient.close();
             inFromClient.close();
@@ -85,7 +91,7 @@ public class ClackServer {
             sskt.close();
 
         }catch(IOException ioe){
-            System.out.println("IO error occurred while starting");
+            System.out.println("IO error occurred while starting: " + ioe);
         }
     }
 
@@ -95,8 +101,9 @@ public class ClackServer {
         }catch(ClassNotFoundException cnfe){
             System.out.println("Class Not Found");
         }catch(IOException ioe){
-            System.out.println("IO error occurred while receiving data");
+            closeConnection = true;
         }
+
     }
 
     void sendData(){

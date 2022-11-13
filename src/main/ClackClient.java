@@ -151,7 +151,7 @@ public class ClackClient {
     public void start(){
 
         try {
-            Socket socket = new Socket(hostName, DEFAULT_PORT);
+            Socket socket = new Socket(hostName, port);
             socket.setSoTimeout(10000);
 
             outToServer = new ObjectOutputStream(socket.getOutputStream());
