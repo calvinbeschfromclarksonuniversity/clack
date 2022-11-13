@@ -5,9 +5,8 @@ import data.ClackData;
 import data.FileClackData;
 import data.MessageClackData;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.net.*;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -26,6 +25,9 @@ public class ClackClient {
     ClackData dataToSendToServer;
     ClackData dataToRecieveFromServer;
     java.util.Scanner inFromStd;
+
+    ObjectInputStream inFromServer;
+    ObjectOutputStream outToServer;
 
     /**
     * Full constructor for clack client
@@ -53,6 +55,9 @@ public class ClackClient {
         this.closeConnection = false;
         dataToSendToServer = null;
         dataToRecieveFromServer = null;
+
+        inFromServer = null;
+        outToServer = null;
     }
     
     /**
@@ -105,14 +110,69 @@ public class ClackClient {
      * @return userName, the name of the client using clack
      */
 
+    /*
+    public static void main(String[] args) {
+
+        ClackClient client;
+
+        String[] splitArgs = args[0].split("")
+
+        if (args.length == 0) {
+            client = new ClackClient();
+        } else if (args.length == 1) {
+            if (args[0].contains("@")) {
+
+                if (args[0].contains(":")) {
+
+                    client = new ClackClient();
+                } else {
+
+                }
+            } else {
+
+            }
+        }
+    }
+*/
+
     /**
      * Starts this client's communication with the server.
      */
     public void start(){
-        inFromStd = new Scanner(System.in);
-        readClientData();
-        dataToRecieveFromServer = dataToSendToServer;
-        printData();
+
+        try {
+            Socket socket = new Socket(hostName, DEFAULT_PORT);
+            socket.setSoTimeout(10000);
+
+            outToServer = new ObjectOutputStream(socket.getOutputStream());
+            inFromServer = new ObjectInputStream(socket.getInputStream());
+
+            inFromStd = new Scanner(System.in);
+
+            while (socket.isConnected()) {
+                readClientData();
+                sendData();
+                recieveData();
+                printData();
+            }
+
+            inFromStd.close();
+            outToServer.close();
+            inFromServer.close();
+            socket.close();
+
+        } catch ( UnknownHostException e ) {
+            System.err.println("Unknown host: " + e);
+        } catch ( NoRouteToHostException e ) {
+            System.err.println("Server unreachable: " + e);
+        } catch ( ConnectException e ) {
+            System.err.println("Connection refused: " + e);
+        } catch (SocketException e) {
+            System.err.println("Socket exception :" + e);
+        } catch (IOException e) {
+            System.err.println("I/O Error : " + e);
+        }
+
     }
 
     /**
@@ -145,8 +205,24 @@ public class ClackClient {
     /**
      * Initializes a ClackData obkect 'dataToSendToServer based upon a given input from the user
      */
-    void sendData(){}
-    void recieveData(){}
+    void sendData(){
+        try {
+            outToServer.writeObject(dataToSendToServer);
+        } catch (IOException e) {
+            System.err.println("I/O Error: " + e);
+        }
+    }
+
+    void recieveData(){
+        try {
+            dataToRecieveFromServer = (ClackData) inFromServer.readObject();
+        } catch (IOException e) {
+           System.err.println("I/O Error : " + e);
+        } catch (ClassNotFoundException e) {
+            System.err.println("Class not found: " + e);
+        }
+    }
+
     void printData(){
             System.out.println(dataToSendToServer);
         }
