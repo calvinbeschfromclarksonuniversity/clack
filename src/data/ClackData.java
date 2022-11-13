@@ -136,3 +136,4 @@ public abstract class ClackData implements java.io.Serializable{
 	public abstract String getData();
 
 }
+
