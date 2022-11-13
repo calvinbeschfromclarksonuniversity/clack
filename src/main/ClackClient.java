@@ -110,30 +110,32 @@ public class ClackClient {
      * @return userName, the name of the client using clack
      */
 
-    /*
     public static void main(String[] args) {
 
         ClackClient client;
 
-        String[] splitArgs = args[0].split("")
-
         if (args.length == 0) {
             client = new ClackClient();
         } else if (args.length == 1) {
+            String[] splitArgs;
+
             if (args[0].contains("@")) {
-
+                splitArgs = args[0].split("@");
                 if (args[0].contains(":")) {
-
-                    client = new ClackClient();
+                    String[] splitArgs2 = splitArgs[1].split(":");
+                    client = new ClackClient(splitArgs[0], splitArgs2[0], Integer.parseInt(splitArgs2[1]));
                 } else {
-
+                    client = new ClackClient(splitArgs[0], splitArgs[1]);
                 }
             } else {
-
+                client = new ClackClient(args[0]);
             }
+        } else {
+            throw new IllegalArgumentException("ClackClient takes either 0 or 1 arguments.");
         }
+
+        client.start();
     }
-*/
 
     /**
      * Starts this client's communication with the server.
