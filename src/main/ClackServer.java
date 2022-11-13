@@ -49,6 +49,10 @@ public class ClackServer {
         this(DEFAULT_PORT);
     }
 
+    /**
+     * Creates and starts an instance of ClackServer with the information provided in args.
+     * @param args either a port number or nothing, in which case the default will be used
+     */
     public static void main(String[] args) {
         ClackServer server;
 
@@ -65,9 +69,6 @@ public class ClackServer {
         }
     }
 
-    /**
-     * Start method for ClackServer reads objectInputStream from user and returns an ObjectOutput Stream
-     */
     void start(){
         try{
             ServerSocket sskt = new ServerSocket(port);
@@ -87,9 +88,7 @@ public class ClackServer {
             System.out.println("IO error occurred while starting");
         }
     }
-    /**
-     * Sets dataToReceiveFromClient to the input from inFromClient
-     */
+
     void receiveData(){
         try {
             dataToReceiveFromClient = (ClackData) inFromClient.readObject();
@@ -99,9 +98,7 @@ public class ClackServer {
             System.out.println("IO error occurred while receiving data");
         }
     }
-    /**
-     * Sets outToClient as the serialized form of dataToSendToClient
-     */
+
     void sendData(){
         try{
             outToClient.writeObject(dataToSendToClient);
