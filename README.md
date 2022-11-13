@@ -26,6 +26,62 @@ Brief Overview:
   
   Command line output:
   
+  With java -jar clackserver.jar:
+  
+  java -jar clackclient.jar
+  test       
+MessageClackData Instance:
+Message: test
+Sender: Anonymous
+Type: 2
+Time sent: Sun Nov 13 16:42:16 EST 2022
+
+  java -jar clackclient.jar trevvywevvy
+hehheehe
+MessageClackData Instance:
+Message: hehheehe
+Sender: trevvywevvy
+Type: 2
+Time sent: Sun Nov 13 16:43:31 EST 2022
+
+java -jar clackclient.jar trevvywevvy@localhost:7000
+hahahahha
+MessageClackData Instance:
+Message: hahahahha
+Sender: trevvywevvy
+Type: 2
+Time sent: Sun Nov 13 16:44:33 EST 2022
+
+java -jar clackclient.jar trevvywevvy@localhost:100
+Exception in thread "main" java.lang.IllegalArgumentException: The port must be an integer greater than 1024
+	at main.ClackClient.<init>(ClackClient.java:51)
+	at main.ClackClient.main(ClackClient.java:131)
+  
+  java -jar clackclient.jar trevvywevvy@localhost
+weeee
+MessageClackData Instance:
+Message: weeee
+Sender: trevvywevvy
+Type: 2
+Time sent: Sun Nov 13 16:46:01 EST 2022
+
+copperthief@boopbox ~/t/d/a/c/c/o/a/clackclient (main) [SIGINT]> java -jar clackcli
+ent.jar trevvywevvy@notlocalhost
+Unknown host: java.net.UnknownHostException: notlocalhost
+
+now, with java -jar clackserver.jar 8000:
+
+java -jar clackclient.jar
+Connection refused: java.net.ConnectException: Connection refused
+
+java -jar clackclient.jar trevvywevvy@localhost:8000
+message
+MessageClackData Instance:
+Message: message
+Sender: trevvywevvy
+Type: 2
+Time sent: Sun Nov 13 16:55:33 EST 2022
+  
   Brief Overview:
   In the Second Part of this project, we implemented the following:
   
