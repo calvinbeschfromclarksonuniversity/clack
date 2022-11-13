@@ -127,7 +127,11 @@ public class ClackClient {
                 splitArgs = args[0].split("@");
                 if (args[0].contains(":")) {
                     String[] splitArgs2 = splitArgs[1].split(":");
-                    client = new ClackClient(splitArgs[0], splitArgs2[0], Integer.parseInt(splitArgs2[1]));
+                    try {
+                        client = new ClackClient(splitArgs[0], splitArgs2[0], Integer.parseInt(splitArgs2[1]));
+                    } catch ( NumberFormatException e ) {
+                        throw new IllegalArgumentException("Text after ':' was not a port number");
+                    }
                 } else {
                     client = new ClackClient(splitArgs[0], splitArgs[1]);
                 }

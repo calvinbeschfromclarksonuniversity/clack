@@ -49,6 +49,22 @@ public class ClackServer {
         this(DEFAULT_PORT);
     }
 
+    public static void main(String[] args) {
+        ClackServer server;
+
+        if (args.length == 0) {
+            server = new ClackServer();
+        } else if (args.length == 1) {
+            try {
+                server = new ClackServer(Integer.parseInt(args[0]));
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Argument was not a port number.");
+            }
+        } else {
+            throw new IllegalArgumentException("ClackServer takes either a port number or no arguments.");
+        }
+    }
+
     /**
      * Start method for ClackServer reads objectInputStream from user and returns an ObjectOutput Stream
      */
