@@ -110,6 +110,10 @@ public class ClackClient {
      * @return userName, the name of the client using clack
      */
 
+    /**
+     * Starts an instance of ClackClient and attemps to connect to a ClackServer using the information provided in args
+      * @param args String in format username@hostname:port, or username@hostname, or just username
+     */
     public static void main(String[] args) {
 
         ClackClient client;
