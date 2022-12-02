@@ -29,17 +29,23 @@ Explain why there should be a separate class to receive data from the
 server and print it, and the client only gets data from the user and sends it to the server.
 Also, why is the class called a ‘listener’?
 
+The client sending and recieving messages must happen at the same time which requires multiple threads, this class is a listener because it waits for a message, or listens so to speak and prints it for the user, whereas the user is the one who speaks by sending messages to the server. 
+
 Explain why you need a separate thread for each client, and why you
 cannot handle all clients in the main server thread. Conceptually, why is the listener
 class ‘ClientSideServerListener’ different from the class ‘ServerSideClientIO’?
 
+With many clients sending messages potentially simultaneoulsly, threads are needed in order to process each client's messages at the same time. Conceptually, the serverSideClientIO is different from the ClientSideServerListener becuase it can send and recieve data whereas the ServerListener cannot. 
+
 Explain why the broadcast() and remove() methods are synchronized.
 You may find it easier to answer this question after completing all programming.
+
+While both broadcast and remove are a part of MessageClackData, they are called from ServerSideClientIO which each have their own thread. If the interleaving of broadcast is incorrect, it could end up sending the same data twice instead of each individual data. If the interleaving of remove is incorrect, and the second instance verifies the data is still there before the first has deleted it, and then attempts to delete nothing could potentially throw errors. 
 
 Discuss all new methods and new code in existing
 methods that you wrote to handle LISTUSERS.
 
-
+We created a string variable in ServerSideClientIO that represents the client's username, which is automatically sent form the client upon creation. When the client sends LISTUSERS we use a for loop across all of the active ServerSideClientIO's that takes the username variable and puts it into a string that is then broadcast to all clients. 
 
 
 
