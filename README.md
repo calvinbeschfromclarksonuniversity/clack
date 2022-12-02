@@ -75,7 +75,13 @@ LISTUSERS
 DONE
 
 
-
+copperthief@boopbox ~/t/d/a/c/c/o/a/clackclient (main)> java -jar clackclient.jar obamnasoda@128.153.1
+68.51:6500
+<trevorator> Hello
+I love JAVA!
+<trevorator> JAVA PATRAYYYYYYY
+lame im leaving
+DONE
 
 
 
