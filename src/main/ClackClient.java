@@ -157,6 +157,9 @@ public class ClackClient {
             outToServer = new ObjectOutputStream(socket.getOutputStream());
             inFromServer = new ObjectInputStream(socket.getInputStream());
 
+            dataToSendToServer = new MessageClackData(this.userName, "greetings", ClackData.CONSTANT_SENDMESSAGE);
+            sendData();
+
             inFromStd = new Scanner(System.in);
 
 //hey idiots if it breaks its because of this this
@@ -194,7 +197,9 @@ public class ClackClient {
         if (input.equals("DONE")) {
             closeConnection = true;
         }
-        else if (input.equals("LISTUSERS")) { /* DO NOT TEST */ }
+        else if (input.equals("LISTUSERS")) {
+            dataToSendToServer = new MessageClackData(userName, null, ClackData.CONSTANT_LISTUSERS);
+        }
         else if (input.length() >= 10 && input.substring(0, 8).equals("SENDFILE")) {
              dataToSendToServer = new FileClackData(userName, input.substring(9), 3);
 

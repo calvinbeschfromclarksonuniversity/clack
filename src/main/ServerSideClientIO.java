@@ -17,6 +17,7 @@ public class ServerSideClientIO implements Runnable {
     ObjectOutputStream outToClient;
     ClackServer server;
     Socket clientSocket;
+    String userName;
 
     /**
      * Full constructor  for ServersideClientIO.
@@ -44,12 +45,16 @@ public class ServerSideClientIO implements Runnable {
             inFromClient = new ObjectInputStream(clientSocket.getInputStream());
             outToClient = new ObjectOutputStream(clientSocket.getOutputStream());
 
+            userName = ((ClackData)inFromClient.readObject()).getUserName();
+
             while (!closeConnection) {
                 receiveData();
                 server.broadcast(dataToReceiveFromClient);
             }
         } catch (IOException e) {
             System.out.println("IO Error when establishing single client connection:" + e);
+        } catch (ClassNotFoundException e) {
+            System.out.println("Class Not Found Exception: " + e);
         }
     }
 
@@ -57,7 +62,7 @@ public class ServerSideClientIO implements Runnable {
         try{
             outToClient.writeObject(dataToSendToClient);
         }catch (IOException ioe){
-            System.out.println("IO error occurred while sending data");
+            System.out.println("IO error occurred while sending data" + ioe);
         }
     }
 

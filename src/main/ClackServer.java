@@ -1,6 +1,7 @@
 package main;
 
 import data.ClackData;
+import data.MessageClackData;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -71,8 +72,9 @@ public class ClackServer {
 
             while (!closeConnection) {
                 Socket clientSkt = sskt.accept();
-                serverSideClientIOList.add(new ServerSideClientIO(this, clientSkt));
-                Thread serverClientIOThread = new Thread(serverSideClientIOList.get(0));
+                ServerSideClientIO connection = new ServerSideClientIO(this, clientSkt);
+                serverSideClientIOList.add(connection);
+                Thread serverClientIOThread = new Thread(connection);
                 serverClientIOThread.start();
             }
 
@@ -85,8 +87,15 @@ public class ClackServer {
 
     synchronized void broadcast (ClackData dataToBroadcastToClients) {
         for (ServerSideClientIO connection : serverSideClientIOList) {
-           connection.setDataToSendToClient(dataToBroadcastToClients);
-           connection.sendData();
+            if (dataToBroadcastToClients.getType() == ClackData.CONSTANT_LISTUSERS) {
+                String usernames = "";
+                for (ServerSideClientIO s : serverSideClientIOList) usernames += s.userName += ", ";
+                connection.setDataToSendToClient(new MessageClackData(dataToBroadcastToClients.getUserName(), usernames, ClackData.CONSTANT_LISTUSERS));
+                connection.sendData();
+            } else {
+                connection.setDataToSendToClient(dataToBroadcastToClients);
+                connection.sendData();
+            }
         }
     }
 
