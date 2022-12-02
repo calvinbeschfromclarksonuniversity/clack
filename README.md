@@ -21,19 +21,40 @@ In ClackServer:
 	-updated the start method to include the multithreading functionality using ServerSideClientIO
 	-Broadcast, a method which takes a message from one client to all client
 	
-In your write-up, explain why there should be a separate class to receive data from the
+	
+	
+WRITEUP QUESTIONS
+	
+Explain why there should be a separate class to receive data from the
 server and print it, and the client only gets data from the user and sends it to the server.
 Also, why is the class called a ‘listener’?
 
-In your write-up, explain why you need a separate thread for each client, and why you
+Explain why you need a separate thread for each client, and why you
 cannot handle all clients in the main server thread. Conceptually, why is the listener
 class ‘ClientSideServerListener’ different from the class ‘ServerSideClientIO’?
 
-In your write-up, explain why the broadcast() and remove() methods are synchronized.
+Explain why the broadcast() and remove() methods are synchronized.
 You may find it easier to answer this question after completing all programming.
 
- In your write-up, discuss all new methods and new code in existing
+Discuss all new methods and new code in existing
 methods that you wrote to handle LISTUSERS.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 Brief Overview:
