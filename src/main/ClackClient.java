@@ -159,11 +159,12 @@ public class ClackClient {
 
             inFromStd = new Scanner(System.in);
 
+//hey idiots if it breaks its because of this this
+            ClientSideServerListener listener = new ClientSideServerListener(this);
+
             while (socket.isConnected()) {
                 readClientData();
                 sendData();
-                recieveData();
-                printData();
             }
 
             inFromStd.close();
@@ -292,5 +293,11 @@ public class ClackClient {
      */
     public int hashCode(){
         return Objects.hash(this.userName, this.hostName, this.port, this.closeConnection, this.dataToSendToServer, this.dataToRecieveFromServer);
+    }
+
+    /** Returns a Bool representing if the client's connection is closed
+     */
+    public boolean getCloseConnection() {
+        return closeConnection;
     }
 }
