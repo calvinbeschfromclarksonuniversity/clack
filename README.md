@@ -1,5 +1,31 @@
-# clack Part 3 report
+# clack Part 4 report
 Authors: Trevor Bartholomew Savage and Calvin Prothificus Besch
+
+Brief Overview:
+	In the Fourth part of this project, we implemented the following:
+	
+	ClientSideServerListener
+	 - a new class which creates a runnable object in ClackClient, and a thread wrapped around the runnable object
+	 - the public constructor, the private ClackClient client variable, and the overridedn run method
+	
+	In ClackClient:
+	- getCloseConnection a method which returns the boolean value of the closeConnection variable
+	- an updated version of start() that utilizes the ClientSideServerListener
+	
+In your write-up, explain why there should be a separate class to receive data from the
+server and print it, and the client only gets data from the user and sends it to the server.
+Also, why is the class called a ‘listener’?
+
+In your write-up, explain why you need a separate thread for each client, and why you
+cannot handle all clients in the main server thread. Conceptually, why is the listener
+class ‘ClientSideServerListener’ different from the class ‘ServerSideClientIO’?
+
+In your write-up, explain why the broadcast() and remove() methods are synchronized.
+You may find it easier to answer this question after completing all programming.
+
+ In your write-up, discuss all new methods and new code in existing
+methods that you wrote to handle LISTUSERS.
+
 
 Brief Overview:
   In the third Part of this project, we implemented the following:
@@ -81,6 +107,11 @@ Message: message
 Sender: trevvywevvy
 Type: 2
 Time sent: Sun Nov 13 16:55:33 EST 2022
+  
+  
+  
+  
+  
   
   Brief Overview:
   In the Second Part of this project, we implemented the following:
