@@ -205,7 +205,7 @@ public class ClackClient {
             closeConnection = true;
         }
         else if (input.equals("LISTUSERS")) {
-            dataToSendToServer = new MessageClackData(userName, null, ClackData.CONSTANT_LISTUSERS);
+            dataToSendToServer = new MessageClackData(userName, "ONLINE:\n", ClackData.CONSTANT_LISTUSERS);
         }
         else if (input.length() >= 10 && input.substring(0, 8).equals("SENDFILE")) {
              dataToSendToServer = new FileClackData(userName, input.substring(9), 3);
