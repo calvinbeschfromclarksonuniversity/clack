@@ -50,11 +50,13 @@ We created a string variable in ServerSideClientIO that represents the client's 
 TESTING:
 Test 1: Calvin has server and 1 client, Trevor has 1 client
 
+Server Output:
 copperthief@boopbox ~/t/d/a/c/c/o/a/clackserver (main)> java -jar clackser
 ver.jar 8000
 Starting ClackServer ...
 ^C⏎ 
 
+Calvin's Client Output:
 copperthief@boopbox ~/t/d/a/c/c/o/a/clackclient (main)> java -jar clackcli
 ent.jar trevvywevy@localhost:8000
 <trevorator> Testing 123
@@ -63,8 +65,14 @@ just kidding!
 <trevorator> trevorator left the room.
 The server closed. Terminating . . .
 
-
-
+Trevor's Client Output:
+C:\Users\trevo\Downloads>java -jar clackclient.jar trevorator@128.153.203.155:8000                                  
+Testing 123                                                                                                          
+<trevvywevy> it didnt work                                                                                          
+<trevvywevy> just kidding!                                                                                         
+LISTUSERS                                                                                                           
+<trevorator> trevorator, trevvywevy,                                                                                
+DONE
 
 
 
