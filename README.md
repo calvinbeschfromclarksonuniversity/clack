@@ -45,9 +45,23 @@ While both broadcast and remove are a part of MessageClackData, they are called 
 Discuss all new methods and new code in existing
 methods that you wrote to handle LISTUSERS.
 
-We created a string variable in ServerSideClientIO that represents the client's username, which is automatically sent form the client upon creation. When the client sends LISTUSERS we use a for loop across all of the active ServerSideClientIO's that takes the username variable and puts it into a string that is then broadcast to all clients. 
+We created a string variable in ServerSideClientIO that represents the client's username, which is automatically sent form the client upon creation. When the client sends LISTUSERS we use a for loop across all of the active ServerSideClientIO's that takes the username variable and puts it into a string that is then broadcast to all clients.
 
+TESTING:
+Test 1: Calvin has server and 1 client, Trevor has 1 client
 
+copperthief@boopbox ~/t/d/a/c/c/o/a/clackserver (main)> java -jar clackser
+ver.jar 8000
+Starting ClackServer ...
+^C⏎ 
+
+copperthief@boopbox ~/t/d/a/c/c/o/a/clackclient (main)> java -jar clackcli
+ent.jar trevvywevy@localhost:8000
+<trevorator> Testing 123
+it didnt work 
+just kidding!
+<trevorator> trevorator left the room.
+The server closed. Terminating . . .
 
 
 
