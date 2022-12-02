@@ -74,7 +74,24 @@ LISTUSERS
 <trevorator> trevorator, trevvywevy,                                                                                
 DONE
 
+Test 2: Trevor has server and 1 client, Calvin has 1 client
 
+Trevor's Server Output
+C:\Users\trevo\Downloads>java -jar ClackServer.jar 6500
+Starting ClackServer ...
+^C
+
+Trevor's Client Output
+C:\Users\trevo\Downloads>java -jar clackclient.jar trevorator@128.153.168.51:6500                                    
+Hello                                                                                                               
+<obamnasoda> I love JAVA!                                                                                           
+JAVA PATRAYYYYYYY                                                                                                   
+<obamnasoda> lame im leaving                                                                                       
+<obamnasoda> obamnasoda left the room.                                                                             
+wow im sad now                                                                                                      
+DONE  
+
+Calvin's Client Output
 copperthief@boopbox ~/t/d/a/c/c/o/a/clackclient (main)> java -jar clackclient.jar obamnasoda@128.153.1
 68.51:6500
 <trevorator> Hello
@@ -82,9 +99,6 @@ I love JAVA!
 <trevorator> JAVA PATRAYYYYYYY
 lame im leaving
 DONE
-
-
-
 
 
 
