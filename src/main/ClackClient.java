@@ -164,12 +164,16 @@ public class ClackClient {
 
 //hey idiots if it breaks its because of this this
             ClientSideServerListener listener = new ClientSideServerListener(this);
+            Thread clientSideServerListenerThread = new Thread(listener);
+            clientSideServerListenerThread.start();
 
-            while (socket.isConnected()) {
+            while (socket.isConnected() && !closeConnection) {
                 readClientData();
                 sendData();
             }
 
+            closeConnection = true;
+            clientSideServerListenerThread.join();
             inFromStd.close();
             outToServer.close();
             inFromServer.close();
@@ -184,7 +188,9 @@ public class ClackClient {
         } catch (SocketException e) {
             System.err.println("Socket exception :" + e);
         } catch (IOException e) {
-            System.err.println("I/O Error : " + e);
+            System.err.println("PI/O Error : " + e);
+        } catch (InterruptedException e) {
+            System.err.println(e);
         }
 
     }
@@ -195,6 +201,7 @@ public class ClackClient {
     void readClientData(){
         String input = inFromStd.nextLine();
         if (input.equals("DONE")) {
+            dataToSendToServer = new MessageClackData(userName, userName + " left the room.", ClackData.CONSTANT_LOGOUT);
             closeConnection = true;
         }
         else if (input.equals("LISTUSERS")) {
@@ -214,9 +221,9 @@ public class ClackClient {
                  dataToSendToServer = null;
              }
         }
-        else{
+        else {
             dataToSendToServer = new MessageClackData(userName, input, 2);
-            }
+        }
     }
     /**
      * Initializes a ClackData obkect 'dataToSendToServer based upon a given input from the user
@@ -225,23 +232,32 @@ public class ClackClient {
         try {
             outToServer.writeObject(dataToSendToServer);
         } catch (IOException e) {
-            System.err.println("I/O Error: " + e);
+            System.err.println("GI/O Error: " + e);
         }
     }
 
     void recieveData(){
         try {
-            dataToRecieveFromServer = (ClackData) inFromServer.readObject();
+            if (!closeConnection) dataToRecieveFromServer = (ClackData) inFromServer.readObject();
+        } catch (SocketTimeoutException e) {
+            dataToRecieveFromServer = null;
+        } catch (EOFException e) {
+            System.err.println("The server closed. Terminating . . .");
+            System.exit(0);
+            closeConnection = true;
         } catch (IOException e) {
-           System.err.println("I/O Error : " + e);
+           System.err.println("DI/O Error : " + e);
         } catch (ClassNotFoundException e) {
             System.err.println("Class not found: " + e);
         }
     }
 
-    void printData(){
-            System.out.println(dataToSendToServer);
+    void printData() {
+        dataToSendToServer = dataToRecieveFromServer;
+        if (dataToSendToServer != null) {
+            System.out.println("<" + dataToSendToServer.getUserName() + "> " + dataToSendToServer.getData());
         }
+    }
     /**
      * Prints the contents of dataToSendToServer to the client
      */

@@ -88,13 +88,17 @@ public class ClackServer {
     synchronized void broadcast (ClackData dataToBroadcastToClients) {
         for (ServerSideClientIO connection : serverSideClientIOList) {
             if (dataToBroadcastToClients.getType() == ClackData.CONSTANT_LISTUSERS) {
-                String usernames = "";
-                for (ServerSideClientIO s : serverSideClientIOList) usernames += s.userName += ", ";
-                connection.setDataToSendToClient(new MessageClackData(dataToBroadcastToClients.getUserName(), usernames, ClackData.CONSTANT_LISTUSERS));
-                connection.sendData();
+                if (connection.userName == dataToBroadcastToClients.getUserName()) {
+                    String usernames = "";
+                    for (ServerSideClientIO s : serverSideClientIOList) usernames += s.userName += ", ";
+                    connection.setDataToSendToClient(new MessageClackData(dataToBroadcastToClients.getUserName(), usernames, ClackData.CONSTANT_LISTUSERS));
+                    connection.sendData();
+                }
             } else {
-                connection.setDataToSendToClient(dataToBroadcastToClients);
-                connection.sendData();
+                if (dataToBroadcastToClients.getUserName() != connection.userName) {
+                    connection.setDataToSendToClient(dataToBroadcastToClients);
+                    connection.sendData();
+                }
             }
         }
     }
