@@ -2,15 +2,24 @@
 Authors: Trevor Bartholomew Savage and Calvin Prothificus Besch
 
 Brief Overview:
-	In the Fourth part of this project, we implemented the following:
+In the Fourth part of this project, we implemented the following:
 	
-	ClientSideServerListener
-	 - a new class which creates a runnable object in ClackClient, and a thread wrapped around the runnable object
+ClientSideServerListener:
+	- a new class which creates a runnable object in ClackClient, and a thread wrapped around the runnable object
 	 - the public constructor, the private ClackClient client variable, and the overridedn run method
 	
-	In ClackClient:
+ServerSideClientIO 
+	- a new class that handles sending and receiving data.
+	-this replaces the send and recieve data methods within ClackServer
+	
+In ClackClient:
 	- getCloseConnection a method which returns the boolean value of the closeConnection variable
 	- an updated version of start() that utilizes the ClientSideServerListener
+	
+In ClackServer: 
+	-Removed outdated functions that are now implemented in ServerSideClientIO
+	-updated the start method to include the multithreading functionality using ServerSideClientIO
+	-Broadcast, a method which takes a message from one client to all client
 	
 In your write-up, explain why there should be a separate class to receive data from the
 server and print it, and the client only gets data from the user and sends it to the server.
